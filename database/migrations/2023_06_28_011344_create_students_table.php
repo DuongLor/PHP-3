@@ -19,6 +19,7 @@ return new class extends Migration
 			$table->string('email')->unique(); // không được trùng email
 			$table->string('address')->nullable(); // trả về null nếu không có giá trị
 			$table->integer('status')->default(1); // giá trị mặc định là 1
+			$table->string('thumbnail')->nullable();
 			$table->date('date_of_birth')->nullable();
 			$table->timestamps();
 		});

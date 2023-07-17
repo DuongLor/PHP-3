@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/42fd71818f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -38,8 +39,11 @@
         @include('client.templates.error')
         @yield('content')
     </main>
+    <script src="{{ asset('libs/input-mask/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    @yield('script')
 </body>
 
 </html>
