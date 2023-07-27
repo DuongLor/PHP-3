@@ -22,6 +22,7 @@ return new class extends Migration
 			$table->string('thumbnail')->nullable();
 			$table->date('date_of_birth')->nullable();
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

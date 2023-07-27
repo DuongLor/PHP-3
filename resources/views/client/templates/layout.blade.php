@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/42fd71818f.js" crossorigin="anonymous"></script>
+    @yield('style')
 </head>
 
 <body>
@@ -29,6 +30,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            @if (Auth::check())
+                                <a class="nav-link" href="{{ route('logout') }}">{{ Auth::user()->name }}</a>
+                            @endif
                         </li>
                     </ul>
                 </div>

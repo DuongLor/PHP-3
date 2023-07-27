@@ -6,13 +6,14 @@ use App\Http\Requests\StudentRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
 	//
 	public function index()
 	{
-		$students = DB::table('students')->get();
+		$students = DB::table('students')->whereNull('deleted_at')->get();
 
 		return view('client.student.index', ['students' => $students]);
 	}
@@ -24,7 +25,7 @@ class StudentController extends Controller
 	{
 		if ($request->isMethod('POST')) {
 			$params = $request->except('_token');
-			if($request->hasFile('image') && $request->file('image')->isValid()){
+			if ($request->hasFile('image') && $request->file('image')->isValid()) {
 				$params['thumbnail'] = uploadFile('hinh', $request->file('image'));
 			};
 			Student::create($params);
@@ -42,8 +43,11 @@ class StudentController extends Controller
 		$student = Student::find($id);
 		$student->name = $request->name;
 		$student->email = $request->email;
-		if($request->hasFile('image') && $request->file('image')->isValid()){
-			$student->thumbnail = uploadFile('hinh', $request->file('image'));
+		if ($request->hasFile('image') && $request->file('image')->isValid()) {
+			$resultDL = Storage::delete('/public/' . $student->thumbnail);
+			if ($resultDL) {
+				$student->thumbnail = uploadFile('hinh', $request->file('image'));
+			}
 		}
 		$student->save();
 		return redirect()->route('student')->with('success', 'Cập nhật thành công');

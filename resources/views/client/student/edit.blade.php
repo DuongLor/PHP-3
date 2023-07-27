@@ -18,8 +18,7 @@
             <div class="col-md-9 col-sm-8">
                 <div class="row">
                     <div class="col-xs-6">
-                        <img id="mat_truoc_preview"
-                            src="@if ($student->thumbnail) {{ Storage::url($student->thumbnail) }} @endif https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg"
+                        <img id="mat_truoc_preview" src="{{ $student->thumbnail ? '' . Storage::url($student->thumbnail) : '' }}"
                             alt="your image" style="max-width: 200px; height:100px; margin-bottom: 10px;"
                             class="img-fluid" />
                         <input type="file" name="image" accept="image/*"
@@ -32,5 +31,22 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-
+@endsection
+@section('script')
+    <script>
+        $(function() {
+            function readURL(input, selector) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        $(selector).attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#cmt_truoc").change(function() {
+                readURL(this, '#mat_truoc_preview');
+            });
+        });
+    </script>
 @endsection

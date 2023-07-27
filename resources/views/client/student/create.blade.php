@@ -30,8 +30,9 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 @endsection

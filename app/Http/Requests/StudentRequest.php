@@ -40,6 +40,7 @@ class StudentRequest extends FormRequest
 						$rules = [
 							'name' => 'required',
 							'email' => 'required|email|unique:students',
+							'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
 						];
 						break;
 				endswitch;
